@@ -57,6 +57,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-height);
 }
 
 body {
@@ -252,6 +253,21 @@ img {
     color: var(--text);
 }
 
+.navbar-link.active {
+    color: var(--text);
+    position: relative;
+}
+
+.navbar-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent);
+}
+
 .navbar-cta {
     font-size: 14px;
     font-weight: 600;
@@ -444,7 +460,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    align-items: center;
+    align-items: start;
 }
 
 .about-images {
