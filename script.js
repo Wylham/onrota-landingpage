@@ -138,6 +138,149 @@
     });
 
     /* ── FADE-IN ON SCROLL ──────────────────────── */
+    /* LOGO MARQUEE */
+    const logoMarquees = document.querySelectorAll('[data-logo-marquee]');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    logoMarquees.forEach(root => {
+        const track = root.querySelector('.logo-marquee__track');
+        if (!track) return;
+
+        const sourceItems = Array.from(track.children).map(item => item.cloneNode(true));
+        const sourceImages = Array.from(track.querySelectorAll('img'));
+
+        if (!sourceItems.length) return;
+
+        let frameId = 0;
+        let resizeFrame = 0;
+        let lastTime = 0;
+        let offset = 0;
+        let loopWidth = 0;
+        let isHovering = false;
+
+        function cloneItem(template, hidden) {
+            const clone = template.cloneNode(true);
+
+            if (hidden) {
+                clone.setAttribute('aria-hidden', 'true');
+            } else {
+                clone.removeAttribute('aria-hidden');
+            }
+
+            return clone;
+        }
+
+        function buildTrack() {
+            track.textContent = '';
+
+            let sequenceCount = 0;
+            let sequenceWidth = 0;
+
+            do {
+                sourceItems.forEach(template => {
+                    track.appendChild(cloneItem(template, sequenceCount > 0));
+                });
+
+                sequenceCount += 1;
+                sequenceWidth = track.scrollWidth;
+            } while (sequenceWidth < root.offsetWidth + 120 && sequenceCount < 8);
+
+            loopWidth = sequenceWidth;
+
+            Array.from(track.children).forEach(item => {
+                track.appendChild(cloneItem(item, true));
+            });
+
+            if (!reducedMotionQuery.matches && loopWidth > 0) {
+                offset = offset % loopWidth;
+                track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+                return;
+            }
+
+            offset = 0;
+            track.style.transform = 'translate3d(0, 0, 0)';
+        }
+
+        function step(time) {
+            if (!lastTime) lastTime = time;
+
+            const delta = (time - lastTime) / 8000;
+            lastTime = time;
+
+            if (loopWidth > 0) {
+                const speed = isHovering ? 28 : 70;
+                offset = (offset + speed * delta) % loopWidth;
+                track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+            }
+
+            frameId = window.requestAnimationFrame(step);
+        }
+
+        function stop(resetPosition) {
+            if (frameId) {
+                window.cancelAnimationFrame(frameId);
+                frameId = 0;
+            }
+
+            lastTime = 0;
+
+            if (resetPosition) {
+                offset = 0;
+                track.style.transform = 'translate3d(0, 0, 0)';
+            }
+        }
+
+        function start() {
+            if (frameId || reducedMotionQuery.matches) return;
+            frameId = window.requestAnimationFrame(step);
+        }
+
+        function rebuild() {
+            stop(reducedMotionQuery.matches);
+            buildTrack();
+            start();
+        }
+
+        function scheduleRebuild() {
+            if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+
+            resizeFrame = window.requestAnimationFrame(() => {
+                resizeFrame = 0;
+                rebuild();
+            });
+        }
+
+        buildTrack();
+        start();
+
+        root.addEventListener('mouseenter', () => {
+            isHovering = true;
+        });
+
+        root.addEventListener('mouseleave', () => {
+            isHovering = false;
+        });
+
+        window.addEventListener('resize', scheduleRebuild, { passive: true });
+        window.addEventListener('load', scheduleRebuild, { once: true });
+
+        sourceImages.forEach(image => {
+            if (!image.complete) {
+                image.addEventListener('load', scheduleRebuild, { once: true });
+            }
+        });
+
+        const handleReducedMotionChange = () => {
+            rebuild();
+        };
+
+        if (typeof reducedMotionQuery.addEventListener === 'function') {
+            reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+        } else if (typeof reducedMotionQuery.addListener === 'function') {
+            reducedMotionQuery.addListener(handleReducedMotionChange);
+        }
+    });
+
     const style = document.createElement('style');
     style.textContent = '.visible { opacity: 1 !important; transform: translateY(0) !important; }';
     document.head.appendChild(style);

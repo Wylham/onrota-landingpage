@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" fill="none">
+  <circle cx="28" cy="36" r="18" fill="#fff" opacity=".92"/>
+  <path d="M22 27h12c5.523 0 10 4.477 10 10s-4.477 10-10 10H22l7-10-7-10Z" fill="#0A0A0A"/>
+  <text x="62" y="31" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1.8">ROTA</text>
+  <text x="62" y="52" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1.8">PRIME</text>
+</svg>
