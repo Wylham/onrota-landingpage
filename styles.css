@@ -1198,6 +1198,17 @@ img {
     margin-bottom: 60px;
 }
 
+.footer-logo {
+    display: inline-block;
+    margin-bottom: 14px;
+}
+
+.footer-logo-img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
 .footer-brand {
     display: block;
     font-size: 14px;
