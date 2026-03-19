@@ -23,16 +23,21 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
 
-    function toggleMenu() {
-        const isOpen = mobileMenu.classList.toggle('open');
+    function setMenuState(isOpen) {
+        mobileMenu.classList.toggle('open', isOpen);
+        hamburger.classList.toggle('is-open', isOpen);
         hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
         document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
+    function toggleMenu() {
+        const isOpen = !mobileMenu.classList.contains('open');
+        setMenuState(isOpen);
+    }
+
     function closeMenu() {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        setMenuState(false);
     }
 
     hamburger.addEventListener('click', toggleMenu);
