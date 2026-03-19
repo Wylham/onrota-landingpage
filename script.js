@@ -43,13 +43,13 @@
         const target = document.getElementById(id);
         if (!target) return;
 
-        const navH  = navbar.offsetHeight;
-        const vH    = window.innerHeight - navH; // available viewport below navbar
+        const navH = navbar.offsetHeight;
+        const vH = window.innerHeight - navH; // available viewport below navbar
 
         // Use the inner .container as the scroll anchor to skip section padding
         const inner = target.querySelector(':scope > .container') || target;
         const innerTop = inner.getBoundingClientRect().top + window.scrollY;
-        const innerH   = inner.offsetHeight;
+        const innerH = inner.offsetHeight;
 
         // Center the content when it fits; align to top with breathing room when taller
         const gap = innerH <= vH
@@ -287,22 +287,26 @@
 
     const animatables = document.querySelectorAll(
         '.feature-card, .service-card, .testimonial-card, .stat-item, ' +
-        '.whyus-card, .about-img, .faq-item, .hero-content'
+        '.whyus-card, .about-img, .faq-item, .hero-content, .mvv-card, .value-item, .hq-content, .leader-card'
     );
 
     const fadeObserver = new IntersectionObserver(entries => {
+        let delayCore = 0;
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delayCore * 100);
+                delayCore++;
                 fadeObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    animatables.forEach((el, i) => {
+    animatables.forEach((el) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(24px)';
-        el.style.transition = `opacity 0.55s ease ${i * 0.05}s, transform 0.55s ease ${i * 0.05}s`;
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1), transform 0.7s cubic-bezier(0.33, 1, 0.68, 1)';
         fadeObserver.observe(el);
     });
 
