@@ -346,3 +346,20 @@
     statNumbers.forEach(el => counterObserver.observe(el));
 
 })();
+
+/* -- CARROSEL SEDE ----------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('hqCarousel');
+    const prevBtn = document.getElementById('sedePrev');
+    const nextBtn = document.getElementById('sedeNext');
+
+    if (carousel && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+        });
+    }
+});
