@@ -1809,6 +1809,11 @@ img {
         display: flex;
     }
 
+    .hero-bg {
+        background-position: 90% center;
+        /* Move a imagem mais para a direita nte o mobile view */
+    }
+
     .hero {
         justify-content: flex-start;
         padding-top: calc(var(--nav-height) + 32px);
