@@ -169,10 +169,10 @@
             shortName: 'Decisão antifraude em segundos.',
             subtitle: 'Análise de Risco',
             description: 'Centraliza consultas de CNH, processos judiciais, ANTT, CRLV e dados cadastrais em um fluxo único para validar motoristas e veículos com rapidez, score judicial automático e rastreabilidade em cada decisão.',
-            color: '#6366f1',
+            color: '#74b8ff',
             icon: 'public/images/logos/solucoes/onrisk.webp',
             tags: ['CNH', 'ANTT', 'CRLV', 'Score Judicial', 'Bases oficiais'],
-            ctaLabel: 'Conhecer OnRisk →'
+            ctaLabel: 'Conhecer OnRisk'
         },
         {
             id: 'oncad',
@@ -180,10 +180,10 @@
             shortName: 'Cadastro seguro sem retrabalho.',
             subtitle: 'Automação de Cadastros',
             description: 'Automatiza o onboarding de motoristas e agregados com OCR, validações oficiais e integração nativa com os principais TMS do mercado. O resultado é consistência de dados, menor custo operacional e ativação mais rápida da operação.',
-            color: '#22c55e',
+            color: '#4f9eff',
             icon: 'public/images/logos/solucoes/oncad.webp',
             tags: ['ATUA', 'SAT', 'Sankhya', 'OCR', 'Login unificado'],
-            ctaLabel: 'Conhecer OnCad →'
+            ctaLabel: 'Conhecer OnCad'
         },
         {
             id: 'ontrack',
@@ -191,10 +191,10 @@
             shortName: 'Rastreamento em tempo real via WhatsApp.',
             subtitle: 'Rastreamento via WhatsApp',
             description: 'Ativa o acompanhamento pelo próprio WhatsApp do motorista em segundos, sem download de aplicativo e sem hardware adicional. Entrega histórico de rota, alertas de parada e velocidade com uma operação simples para a base logística.',
-            color: '#ef4444',
+            color: '#2f82ff',
             icon: 'public/images/logos/solucoes/ontrack.webp',
             tags: ['WhatsApp', 'Tempo real', 'Alertas de rota', 'Paradas', 'Velocidade'],
-            ctaLabel: 'Conhecer OnTrack →'
+            ctaLabel: 'Conhecer OnTrack'
         },
         {
             id: 'onid',
@@ -202,10 +202,10 @@
             shortName: 'Identidade validada na origem.',
             subtitle: 'Identificação Biométrica',
             description: 'Executa biometria facial com captura guiada, comparação com a foto da CNH e validação direta nas bases do Detran. Retorna similaridade, geolocalização e alertas de autenticidade para reduzir fraudes de identidade com precisão.',
-            color: '#3b82f6',
+            color: '#63d8ff',
             icon: 'public/images/logos/solucoes/onid.webp',
             tags: ['Biometria facial', 'CNH', 'Detran', 'Similaridade', 'Geolocalização'],
-            ctaLabel: 'Conhecer OnID →'
+            ctaLabel: 'Conhecer OnID'
         },
         {
             id: 'ondeep',
@@ -213,10 +213,10 @@
             shortName: 'Contexto completo para análises sensíveis.',
             subtitle: 'Análise 360°',
             description: 'Combina histórico profissional, dados judiciais, habilitação e consistência documental em uma leitura única do candidato. Ideal para aprofundar validações críticas com mais contexto, rastreabilidade e segurança operacional.',
-            color: '#f59e0b',
+            color: '#3d72dc',
             icon: 'public/images/logos/solucoes/ondeep.webp',
             tags: ['Histórico profissional', 'Judicial', 'Habilitação', 'Documentos', 'Visão 360°'],
-            ctaLabel: 'Conhecer OnDeep →'
+            ctaLabel: 'Conhecer OnDeep'
         },
         {
             id: 'onrota',
@@ -224,10 +224,10 @@
             shortName: 'Diagnóstico, plano de ação e ganho real de eficiência.',
             subtitle: 'Consultoria Especializada',
             description: 'A consultoria da OnRota analisa a operação de ponta a ponta para identificar desperdícios, falhas de processo, riscos de fraude e oportunidades de otimização. O trabalho combina diagnóstico, planejamento, implementação assistida e acompanhamento contínuo com foco em segurança e resultado operacional.',
-            color: '#14b8a6',
+            color: '#8abfff',
             icon: 'public/images/logos/onrota.webp',
             tags: ['Diagnóstico', 'Planejamento', 'Implementação', 'Auditoria', 'Resultados'],
-            ctaLabel: 'Conhecer a consultoria →'
+            ctaLabel: 'Conhecer a consultoria'
         }
     ].map(product => ({
         ...product,
@@ -260,8 +260,12 @@
                         </div>
                     </div>
                     <div class="solutions-product-panel__footer">
-                        <a href="#contact" class="solutions-product-panel__cta">${escapeHtml(product.ctaLabel)}</a>
-                        <a href="#contact" class="solutions-product-panel__link">Ver demonstração</a>
+                        <a href="#contact" class="solutions-product-panel__cta">
+                            <span class="solutions-product-panel__cta-text">${escapeHtml(product.ctaLabel)}</span>
+                            <span class="solutions-product-panel__cta-icon" aria-hidden="true">
+                                <i class="ph ph-arrow-right"></i>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </article>
