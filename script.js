@@ -142,6 +142,229 @@
         });
     });
 
+    /* ── SOLUTIONS SHOWCASE ───────────────────────────── */
+    function hexToRgb(hex) {
+        const normalized = hex.replace('#', '');
+        const fullHex = normalized.length === 3
+            ? normalized.split('').map(char => char + char).join('')
+            : normalized;
+        const value = Number.parseInt(fullHex, 16);
+
+        return `${(value >> 16) & 255}, ${(value >> 8) & 255}, ${value & 255}`;
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    const showcaseProducts = [
+        {
+            id: 'onrisk',
+            name: 'OnRisk',
+            shortName: 'Decisão antifraude em segundos.',
+            subtitle: 'Análise de Risco',
+            description: 'Centraliza consultas de CNH, processos judiciais, ANTT, CRLV e dados cadastrais em um fluxo único para validar motoristas e veículos com rapidez, score judicial automático e rastreabilidade em cada decisão.',
+            color: '#6366f1',
+            icon: 'public/images/logos/solucoes/onrisk.webp',
+            tags: ['CNH', 'ANTT', 'CRLV', 'Score Judicial', 'Bases oficiais'],
+            ctaLabel: 'Conhecer OnRisk →'
+        },
+        {
+            id: 'oncad',
+            name: 'OnCad',
+            shortName: 'Cadastro seguro sem retrabalho.',
+            subtitle: 'Automação de Cadastros',
+            description: 'Automatiza o onboarding de motoristas e agregados com OCR, validações oficiais e integração nativa com os principais TMS do mercado. O resultado é consistência de dados, menor custo operacional e ativação mais rápida da operação.',
+            color: '#22c55e',
+            icon: 'public/images/logos/solucoes/oncad.webp',
+            tags: ['ATUA', 'SAT', 'Sankhya', 'OCR', 'Login unificado'],
+            ctaLabel: 'Conhecer OnCad →'
+        },
+        {
+            id: 'ontrack',
+            name: 'OnTrack',
+            shortName: 'Rastreamento em tempo real via WhatsApp.',
+            subtitle: 'Rastreamento via WhatsApp',
+            description: 'Ativa o acompanhamento pelo próprio WhatsApp do motorista em segundos, sem download de aplicativo e sem hardware adicional. Entrega histórico de rota, alertas de parada e velocidade com uma operação simples para a base logística.',
+            color: '#ef4444',
+            icon: 'public/images/logos/solucoes/ontrack.webp',
+            tags: ['WhatsApp', 'Tempo real', 'Alertas de rota', 'Paradas', 'Velocidade'],
+            ctaLabel: 'Conhecer OnTrack →'
+        },
+        {
+            id: 'onid',
+            name: 'OnID',
+            shortName: 'Identidade validada na origem.',
+            subtitle: 'Identificação Biométrica',
+            description: 'Executa biometria facial com captura guiada, comparação com a foto da CNH e validação direta nas bases do Detran. Retorna similaridade, geolocalização e alertas de autenticidade para reduzir fraudes de identidade com precisão.',
+            color: '#3b82f6',
+            icon: 'public/images/logos/solucoes/onid.webp',
+            tags: ['Biometria facial', 'CNH', 'Detran', 'Similaridade', 'Geolocalização'],
+            ctaLabel: 'Conhecer OnID →'
+        },
+        {
+            id: 'ondeep',
+            name: 'OnDeep',
+            shortName: 'Contexto completo para análises sensíveis.',
+            subtitle: 'Análise 360°',
+            description: 'Combina histórico profissional, dados judiciais, habilitação e consistência documental em uma leitura única do candidato. Ideal para aprofundar validações críticas com mais contexto, rastreabilidade e segurança operacional.',
+            color: '#f59e0b',
+            icon: 'public/images/logos/solucoes/ondeep.webp',
+            tags: ['Histórico profissional', 'Judicial', 'Habilitação', 'Documentos', 'Visão 360°'],
+            ctaLabel: 'Conhecer OnDeep →'
+        },
+        {
+            id: 'onrota',
+            name: 'OnRota',
+            shortName: 'Diagnóstico, plano de ação e ganho real de eficiência.',
+            subtitle: 'Consultoria Especializada',
+            description: 'A consultoria da OnRota analisa a operação de ponta a ponta para identificar desperdícios, falhas de processo, riscos de fraude e oportunidades de otimização. O trabalho combina diagnóstico, planejamento, implementação assistida e acompanhamento contínuo com foco em segurança e resultado operacional.',
+            color: '#14b8a6',
+            icon: 'public/images/logos/onrota.webp',
+            tags: ['Diagnóstico', 'Planejamento', 'Implementação', 'Auditoria', 'Resultados'],
+            ctaLabel: 'Conhecer a consultoria →'
+        }
+    ].map(product => ({
+        ...product,
+        colorRgb: hexToRgb(product.color)
+    }));
+
+    function renderShowcasePanel(product, isActive) {
+        const colorStyle = `--solution-color: ${product.color}; --solution-color-rgb: ${product.colorRgb};`;
+
+        return `
+            <article class="solutions-product-panel${isActive ? ' is-active' : ''}" role="tabpanel"
+                id="solution-panel-${product.id}" aria-labelledby="solution-tab-${product.id}"
+                aria-hidden="${isActive ? 'false' : 'true'}" tabindex="${isActive ? '0' : '-1'}"
+                style="${colorStyle}">
+                <div class="solutions-product-panel__inner">
+                    <div class="solutions-product-panel__hero">
+                        <div class="solutions-product-panel__icon" aria-hidden="true">
+                            <img src="${product.icon}" alt="" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="solutions-product-panel__title-group">
+                            <p class="solutions-product-panel__eyebrow">${escapeHtml(product.subtitle)}</p>
+                            <p class="solutions-product-panel__tagline">${escapeHtml(product.shortName)}</p>
+                        </div>
+                    </div>
+                    <p class="solutions-product-panel__description">${escapeHtml(product.description)}</p>
+                    <div class="solutions-product-panel__meta">
+                        <span class="solutions-product-panel__meta-label">Integrações e sinais críticos</span>
+                        <div class="solutions-product-panel__tags">
+                            ${product.tags.map(tag => `<span class="solutions-product-panel__tag">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="solutions-product-panel__footer">
+                        <a href="#contact" class="solutions-product-panel__cta">${escapeHtml(product.ctaLabel)}</a>
+                        <a href="#contact" class="solutions-product-panel__link">Ver demonstração</a>
+                    </div>
+                </div>
+            </article>
+        `;
+    }
+
+    document.querySelectorAll('[data-solutions-showcase]').forEach(root => {
+        root.innerHTML = `
+            <div class="solutions-tabs" role="tablist" aria-label="Produtos OnRota" aria-orientation="vertical">
+                ${showcaseProducts.map((product, index) => {
+                    const colorStyle = `--solution-color: ${product.color}; --solution-color-rgb: ${product.colorRgb};`;
+
+                    return `
+                        <button class="solutions-tab${index === 0 ? ' is-active' : ''}" type="button" role="tab"
+                            id="solution-tab-${product.id}" aria-selected="${index === 0 ? 'true' : 'false'}"
+                            aria-controls="solution-panel-${product.id}" tabindex="${index === 0 ? '0' : '-1'}"
+                            aria-label="${escapeHtml(product.name)}"
+                            style="${colorStyle}">
+                            <span class="solutions-tab__icon" aria-hidden="true">
+                                <img src="${product.icon}" alt="" loading="lazy" decoding="async" />
+                            </span>
+                            <span class="solutions-tab__copy">
+                                <span class="solutions-tab__subtitle">${escapeHtml(product.subtitle)}</span>
+                            </span>
+                        </button>
+                    `;
+                }).join('')}
+            </div>
+            <div class="solutions-panel-stack">
+                ${showcaseProducts.map((product, index) => renderShowcasePanel(product, index === 0)).join('')}
+            </div>
+        `;
+
+        const tabs = Array.from(root.querySelectorAll('.solutions-tab'));
+        const panels = Array.from(root.querySelectorAll('.solutions-product-panel'));
+        let activeIndex = -1;
+
+        function setActiveSolution(nextIndex, focusTab) {
+            if (nextIndex === activeIndex) {
+                if (focusTab) tabs[nextIndex].focus();
+                return;
+            }
+
+            activeIndex = nextIndex;
+
+            tabs.forEach((tab, index) => {
+                const isActive = index === nextIndex;
+                tab.classList.toggle('is-active', isActive);
+                tab.setAttribute('aria-selected', String(isActive));
+                tab.tabIndex = isActive ? 0 : -1;
+            });
+
+            panels.forEach((panel, index) => {
+                const isActive = index === nextIndex;
+                panel.classList.toggle('is-active', isActive);
+                panel.setAttribute('aria-hidden', String(!isActive));
+                panel.tabIndex = isActive ? 0 : -1;
+                panel.inert = !isActive;
+            });
+
+            if (focusTab) tabs[nextIndex].focus();
+        }
+
+        setActiveSolution(0, false);
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                setActiveSolution(index, false);
+            });
+
+            tab.addEventListener('keydown', event => {
+                let nextIndex = null;
+
+                switch (event.key) {
+                    case 'ArrowDown':
+                    case 'ArrowRight':
+                        nextIndex = (index + 1) % tabs.length;
+                        break;
+                    case 'ArrowUp':
+                    case 'ArrowLeft':
+                        nextIndex = (index - 1 + tabs.length) % tabs.length;
+                        break;
+                    case 'Home':
+                        nextIndex = 0;
+                        break;
+                    case 'End':
+                        nextIndex = tabs.length - 1;
+                        break;
+                    case 'Enter':
+                    case ' ':
+                        event.preventDefault();
+                        setActiveSolution(index, true);
+                        return;
+                    default:
+                        return;
+                }
+
+                event.preventDefault();
+                setActiveSolution(nextIndex, true);
+            });
+        });
+    });
+
     /* ── FADE-IN ON SCROLL ──────────────────────── */
     /* LOGO MARQUEE */
     const logoMarquees = document.querySelectorAll('[data-logo-marquee]');
@@ -291,7 +514,7 @@
     document.head.appendChild(style);
 
     const animatables = document.querySelectorAll(
-        '.feature-card, .service-card, .testimonial-card, .stat-item, ' +
+        '.solutions-showcase, .service-card, .testimonial-card, .stat-item, ' +
         '.whyus-card, .about-img, .faq-item, .hero-content, .mvv-card, .value-item, .hq-content, .leader-card'
     );
 
