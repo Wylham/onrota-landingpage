@@ -752,26 +752,36 @@ img {
     align-items: start;
 }
 
+.about-text .h2 {
+    margin-bottom: 18px;
+}
+
+.about-text .body-text+.body-text {
+    margin-top: 16px;
+}
+
+.about-text .btn-secondary {
+    margin-top: 32px;
+}
+
 .about-images {
     position: relative;
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 16px;
+    grid-template-columns: 1fr;
+    width: min(100%, 450px);
+    justify-self: end;
+    align-items: start;
 }
 
 .about-img {
+    width: 100%;
     border-radius: var(--radius-xl);
     overflow: hidden;
     border: 1px solid var(--border);
 }
 
 .about-img--main {
-    aspect-ratio: 3/4;
-}
-
-.about-img--secondary {
-    aspect-ratio: 2/3;
-    margin-top: 40px;
+    aspect-ratio: 5/6;
 }
 
 .about-img-inner {
@@ -788,7 +798,7 @@ img {
 
 /* About images */
 .about-img-inner--truck {
-    background-image: url('public/images/sections/about-truck.jpg');
+    background-image: url('public/images/sections/missao1.webp');
     background-size: cover;
     background-position: center;
     background-color: #1a1a1a;
@@ -800,18 +810,6 @@ img {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
-}
-
-.about-img-inner--truck::after {
-    content: 'FROTA ONROTA';
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
 }
 
 .about-img-inner--warehouse {
@@ -1583,14 +1581,14 @@ img {
     }
 
     .about-images {
-        grid-template-columns: 1fr 1fr;
-        max-height: 420px;
+        grid-template-columns: 1fr;
+        max-height: none;
+        width: 100%;
+        justify-self: stretch;
     }
 
-    .about-img--main,
-    .about-img--secondary {
+    .about-img--main {
         aspect-ratio: 4/3;
-        margin-top: 0;
     }
 
     .stats-grid {
@@ -1899,10 +1897,8 @@ img {
     .about-images {
         grid-template-columns: 1fr;
         max-height: none;
-    }
-
-    .about-img--secondary {
-        display: none;
+        width: 100%;
+        justify-self: stretch;
     }
 
     .about-img--main {
