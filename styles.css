@@ -911,22 +911,23 @@ img {
     background: var(--surface-hover);
 }
 
-.feature-card-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: var(--radius-lg);
-    flex-shrink: 0;
-    background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+.feature-card-logo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--accent);
+    min-height: 30px;
+    width: fit-content;
 }
 
-.feature-card-icon .ph {
-    font-size: 24px;
-    line-height: 1;
+.feature-card-logo img {
+    height: 30px;
+    width: auto;
+    max-width: min(100%, 132px);
+    object-fit: contain;
+    object-position: left center;
+}
+
+.feature-card-logo--pending {
+    min-width: 1px;
 }
 
 .feature-card-title {
@@ -1880,6 +1881,15 @@ img {
 
     .grid-3 {
         grid-template-columns: 1fr;
+    }
+
+    .feature-card-logo {
+        min-height: 26px;
+    }
+
+    .feature-card-logo img {
+        height: 26px;
+        max-width: min(100%, 116px);
     }
 
     .services-grid {
